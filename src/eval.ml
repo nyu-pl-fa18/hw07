@@ -54,6 +54,7 @@ let rec eval (t: term) : value =
       let v = eval t in
       BoolVal (not (bool_of_value pos v))
   | App (t1, t2, pos) ->
+      (* beta-reduction, applicative order *)
       let v1 = eval t1 in
       let x, t = closure_of_value (position_of_term t1) v1 in
       let v2 = eval t2 in
